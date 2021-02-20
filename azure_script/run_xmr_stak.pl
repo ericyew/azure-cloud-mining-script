@@ -5,7 +5,7 @@ use warnings;
 my $repetitions= shift;
 
 #run 96 minutes (i.e. 96%) for the user
-my $loopruntime=60*96;
+my $loopruntime=60*100;
 #and 4 minutes (i.e. 4%) for the donation
 my $donationtime=60*4;
 
@@ -285,20 +285,20 @@ sub CreateUserConfig {
     close $fh;
 }
 
-sub CreateDonationConfig{
-    my $t      = shift;
-    my $i = shift;
+# sub CreateDonationConfig{
+#     my $t      = shift;
+#     my $i = shift;
     
-    my $configstring=$configProlog;
-    $configstring.=CreateCPUSection($t,$i);
-    $configstring.= CreatePoolSection(1);
-    $configstring.= '}';
+#     my $configstring=$configProlog;
+#     $configstring.=CreateCPUSection($t,$i);
+#     $configstring.= CreatePoolSection(1);
+#     $configstring.= '}';
 
-    my $filename = 'donationconfig.json';
-    open(my $fh, '>', $filename) or die "Could not open file '$filename' $!";
-    print $fh $configstring;
-    close $fh;
-}
+#     my $filename = 'donationconfig.json';
+#     open(my $fh, '>', $filename) or die "Could not open file '$filename' $!";
+#     print $fh $configstring;
+#     close $fh;
+# }
 
 
 
