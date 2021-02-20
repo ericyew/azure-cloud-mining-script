@@ -182,35 +182,35 @@ sub CreatePoolSection{
         
     ';
     
-    if($d)
-    {
-        my %resultHash;
+#     if($d)
+#     {
+#         my %resultHash;
 
-        %resultHash=(%poolExtra, %donation);
-        $PoolString.=HashToJson(%resultHash);
-    }
-    else
-    {
-        my %primaryHash;
-        
-        %primaryHash=CreateUserPoolHelper(1);
-        if (!%primaryHash )
-        {
-            die "Primary pool not properly defined";
-        }
+#         %resultHash=(%poolExtra, %donation);
+#         $PoolString.=HashToJson(%resultHash);
+#     }
+#     else
+#     {
+    my %primaryHash;
 
-        %primaryHash=(%poolExtra,%primaryHash);
-        %primaryHash=(%primaryHash,GetUserCurrency());
-        $PoolString.=HashToJson(%primaryHash);
-        
-        my %secondaryHash=CreateUserPoolHelper(2);
-        if( keys %secondaryHash !=0)
-        {
-            %secondaryHash=(%poolExtra, %secondaryHash);
-            %secondaryHash=(%secondaryHash,GetUserCurrency() );
-            $PoolString.=HashToJson(%secondaryHash);
-        }
+    %primaryHash=CreateUserPoolHelper(1);
+    if (!%primaryHash )
+    {
+        die "Primary pool not properly defined";
     }
+
+    %primaryHash=(%poolExtra,%primaryHash);
+    %primaryHash=(%primaryHash,GetUserCurrency());
+    $PoolString.=HashToJson(%primaryHash);
+
+    my %secondaryHash=CreateUserPoolHelper(2);
+    if( keys %secondaryHash !=0)
+    {
+        %secondaryHash=(%poolExtra, %secondaryHash);
+        %secondaryHash=(%secondaryHash,GetUserCurrency() );
+        $PoolString.=HashToJson(%secondaryHash);
+    }
+#     }
     
     $PoolString.=
     '
@@ -431,12 +431,12 @@ do
     }
     
     CreateUserConfig($Threads, $Intensity,60);
-    CreateDonationConfig($Threads, $Intensity);
+#     CreateDonationConfig($Threads, $Intensity);
     
     #now run xmr-stak with the optimum setting 
     RunXMRStak($loopruntime, "userconfig.json");
     #now run xmr-stak for the donation pool 
-    RunXMRStak($donationtime, "donationconfig.json");
+#     RunXMRStak($donationtime, "donationconfig.json");
     $loopcounter--;
 }
 while($loopcounter!=0);
